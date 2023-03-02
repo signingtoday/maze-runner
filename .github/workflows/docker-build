@@ -1,0 +1,12 @@
+name: docker-build
+run-name: ${{ github.actor }} building with Docker
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker version
+      - run: docker -t signingtoyday/maze-runner:test .
+      - run: docker run --rm --name benevolent-dictator signingtoyday/maze-runner:test
