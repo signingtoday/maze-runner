@@ -11,3 +11,25 @@ jobs:
           node-version: '14'
       - run: npm install -g bats
       - run: bats -v
+      - name: Install jq tool
+        run: |
+          sudo apt-get update
+          sudo apt-get install jq
+      - run: jq --version
+
+  build-me:
+    runs-on: windows-latest
+    steps:
+      - run: choco install gh
+      - run: gh version
+
+  build-on-mac:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install GitHub CLI
+        run: |
+          brew update
+          brew install gh
+      - run: gh version
